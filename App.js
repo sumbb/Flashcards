@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import DeckList from './components/DeckList'
+import { View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
 import { purple } from './utils/colors'
-import AddDeck from './components/AddDeck'
 import Tabs from './components/Tabs'
+import Deck from './components/Deck'
 
 
 function AppStatusBar({backgroundColor, ...props}) {
@@ -20,7 +19,7 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
-        <Tabs />
+        <Deck deck={{ name: 'deck1', numOfCards: 4}}/>
       </View>
     );
   }
