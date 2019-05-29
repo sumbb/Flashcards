@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
-import { white, purple, gray } from '../utils/colors'
+import { View, Text, StyleSheet,  TouchableOpacity } from 'react-native'
+import { white, purple, gray, red } from '../utils/colors'
 
 class DeckInList extends Component {
     render() {
-        const { deck } = this.props
+        const { deck, onPress } = this.props
         if(deck === null) {
             return (
                 <View style={styles.footer}>
@@ -13,12 +13,12 @@ class DeckInList extends Component {
         } else {
             return (
                 <View style={styles.item}>
-                    <TouchableOpacity >
-                        <View style={styles.container}>
+                    <View style={styles.container}>
+                        <TouchableOpacity onPress={() => onPress(deck.name)}>
                             <Text style={styles.deckText}>{deck.name}</Text>
                             <Text style={styles.deckCardtext}>{`${deck.numOfCards} cards`}</Text>
-                        </View>
-                    </TouchableOpacity>
+                        </TouchableOpacity>
+                    </View>
                 </View>)
         }
     }
@@ -30,16 +30,17 @@ export default DeckInList;
 const styles = StyleSheet.create({
     item: {
         backgroundColor: white,
-        borderRadius: Platform.OS === 'ios' ? 16 : 2,
+        borderRadius: 16,
+        borderWidth: 1,
         padding: 20,
         height: 150,
         marginLeft: 10,
         marginRight: 10,
         marginTop: 17,
         justifyContent: 'center',
-        shadowRadius: 3,
+        shadowRadius: 7,
         shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 1)',
+        shadowColor: 'rgba(0, 0, 0, 0.25)',
         shadowOffset: {
             width: 0,
             height: 3

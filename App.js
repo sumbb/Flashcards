@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import DeckList from './components/DeckList'
 import { Constants } from 'expo'
 import { purple } from './utils/colors'
+import AddDeck from './components/AddDeck'
 
 const decksArray = [
   {
@@ -58,9 +59,9 @@ function AppStatusBar({backgroundColor, ...props}) {
 export default class App extends React.Component {
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
-        <DeckList decks={decksArray}/>
+        <AddDeck />
       </View>
     );
   }

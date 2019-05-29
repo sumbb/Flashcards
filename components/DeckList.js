@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, FlatList } from 'react-native'
 import DeckInList from './DeckInList'
 
 class DeckList extends Component {
 
+    onSelectDeck = (name) => {
+        console.log(name)
+        // TODO :: navigate to the selected Deck
+    }
+
     renderItem = ({ item }) => {
         return (
-            <DeckInList deck={item}/>
+            <DeckInList deck={item} onPress={this.onSelectDeck}/>
         )
     }
 
