@@ -21,7 +21,10 @@ class AddCard extends Component {
         console.log(this.state)
         // Add card to the Deck in db 
         // update the store 
-        // navigate back to the deck view
+        this.props.navigation.navigate(
+            'Deck',
+            { deck: this.props.navigation.state.params.deck } // will be changed later 
+        )
     }
 
     isDisabled = () => {
@@ -62,7 +65,6 @@ export default AddCard
 const styles = StyleSheet.create({
     formContainer: {
         alignItems: 'center',
-        backgroundColor: white,
         flex: 1,
         padding: 30,
         marginTop: 100

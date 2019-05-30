@@ -17,7 +17,10 @@ class Deck extends Component {
 
     onAddCard = ({ deck }) => {
         console.log("Add card to: " , deck.name)
-        // TODO : navigate to the Addcard 
+        this.props.navigation.navigate(
+            'AddCard',
+            { deck: deck }
+        )
     }
 
     onStartQuiz = ({ deck }) => {
@@ -33,7 +36,8 @@ class Deck extends Component {
     }
 
     render() {
-        const { deck } = this.props
+        const { deck } = this.props.navigation.state.params
+
         return (
             <View style={styles.container}>
                 <View style={{marginTop: 50}}>
@@ -89,7 +93,6 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         flex: 1,
-        backgroundColor: white,
         marginTop: 150
     },
     addCardBtn: {

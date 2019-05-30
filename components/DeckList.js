@@ -47,9 +47,13 @@ const decksArray = [
 
 class DeckList extends Component {
 
-    onSelectDeck = (name) => {
-        console.log(name)
-        // TODO :: navigate to the selected Deck
+    onSelectDeck = (deck) => {
+        console.log(deck.name)
+        console.log(this.props.navigation)
+        this.props.navigation.navigate(
+          'Deck',
+          { deck: deck } 
+        )
     }
 
     renderItem = ({ item }) => {

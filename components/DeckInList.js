@@ -14,7 +14,7 @@ class DeckInList extends Component {
             return (
                 <View style={styles.item}>
                     <View style={styles.container}>
-                        <TouchableOpacity onPress={() => onPress(deck.name)}>
+                        <TouchableOpacity onPress={() => onPress(deck)}>
                             <Text style={styles.deckText}>{deck.name}</Text>
                             <Text style={styles.deckCardtext}>{`${deck.numOfCards} cards`}</Text>
                         </TouchableOpacity>
