@@ -15,21 +15,6 @@ function AppStatusBar({backgroundColor, ...props}) {
   )
 }  
 
-const data = {
-  title: 'React',
-  totalCards: 2,
-  questions: [
-    {
-      question: 'What is React?',
-      answer: 'A library for managing user interfaces'
-    },
-    {
-      question: 'Where do you make Ajax requests in React?',
-      answer: 'The componentDidMount lifecycle event'
-    }
-  ]
-}
-
 export default class App extends React.Component {
   render() {
     return (

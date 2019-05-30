@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView} from 'react-native'
 import { black, red, purple, white } from '../utils/colors'
+import { connect } from 'react-redux'
+import { getArrayOfDeckTitles, deckPresent } from '../utils/helper'
+import { addDeck } from '../actions';
+import { saveDeckTitle } from '../utils/api'
 
 function SubmitBtn({ onPress, isDisabled }) {
     return (
@@ -20,10 +24,29 @@ class AddDeck extends Component {
     }
 
     onSubmit = () => {
-        console.log(this.state.text)
-        // TODO : Add to the store
-        // TODO : add to the database
-        // TODO : navigate to the deck
+        const { text } = this.state
+        const { dispatch, deckTitles } = this.props
+        if(deckPresent(text, deckTitles)) {
+            alert(`${text} is present, add another title`)
+            
+            
+        } else {
+            dispatch(addDeck(text))
+            saveDeckTitle(text)
+
+            const deck = {
+                title: text,
+                questions: []
+            }
+            this.props.navigation.navigate(
+                'Deck',
+                { deck: deck }
+            )
+        }
+        this.setState({
+            text: ''
+        })
+        
     }
     
     isDisabled = () => {
@@ -48,7 +71,13 @@ class AddDeck extends Component {
     }
 }
 
-export default AddDeck
+function mapStateToProps(decks) {
+    return {
+        deckTitles: getArrayOfDeckTitles(decks)
+    }
+}
+
+export default connect(mapStateToProps)(AddDeck)
 
 const styles = StyleSheet.create({
     formContainer: {

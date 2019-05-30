@@ -5,6 +5,7 @@ import AppButton from './AppButton'
 import { connect } from 'react-redux'
 import { formatDeck } from '../utils/helper'
 import { addQuestion } from '../actions';
+import { addCardToDeck } from '../utils/api'
 
 class AddCard extends Component {
 
@@ -28,11 +29,12 @@ class AddCard extends Component {
             answer: answerText
         }
 
-        // Add card to the Deck in db 
+        addCardToDeck(deck.title, question)
+
         dispatch(addQuestion(deck.title, question))
         this.props.navigation.navigate(
             'Deck',
-            { deck: deck } // will be changed later 
+            { deck: deck } 
         )
     }
 

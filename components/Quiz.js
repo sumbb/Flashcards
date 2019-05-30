@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from './Card'
 import Result from './Result'
+import { connect } from 'react-redux'
 
 class Quiz extends Component {
     state = {
@@ -37,7 +38,13 @@ class Quiz extends Component {
             numOfAnswered: 0,
             numOfCorrectAnswers: 0
         })
-        // TODO : navigate back to the deck for this.props.title deck
+        const deck = {
+            title: this.props.title
+        }
+        this.props.navigation.navigate(
+            'Deck',
+            { deck: deck }
+        )
     }
 
     flipCard = () => {
@@ -59,4 +66,11 @@ class Quiz extends Component {
     }
 }
 
-export default Quiz
+function mapStateToProps(decks, { navigation }) {
+    const { deck } = navigation.state.params
+    return {
+        title: deck.title,
+        questions: decks[deck.title]['questions']
+    }
+}
+export default connect(mapStateToProps)(Quiz)
