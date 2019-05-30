@@ -1,55 +1,21 @@
 import React, { Component } from 'react'
-import { View, FlatList } from 'react-native'
+import { View, FlatList, AsyncStorage } from 'react-native'
 import DeckInList from './DeckInList'
-
-const decksArray = [
-    {
-      key: 'deck1',
-      name: 'deck1',
-      numOfCards: 10
-    },
-    { 
-      key: 'deck2',
-      name: 'deck2',
-      numOfCards: 20
-    },
-    {
-      key: 'deck3',
-      name: 'deck3',
-      numOfCards: 30
-    },
-    {
-      key: 'deck4',
-      name: 'deck4',
-      numOfCards: 30
-    },
-    {
-      key: 'deck5',
-      name: 'deck5',
-      numOfCards: 30
-    },
-    {
-      key: 'deck6',
-      name: 'deck6',
-      numOfCards: 70
-    },
-    {
-      key: 'deck7',
-      name: 'deck7',
-      numOfCards: 70
-    },
-    {
-      key: 'deck8',
-      name: 'deck8',
-      numOfCards: 70
-    }
-  ]
+import { connect } from 'react-redux'
+import { getDecks } from '../utils/api'
+import { addDecks } from '../actions';
+import { formatDeckWithKey } from '../utils/helper';
 
 class DeckList extends Component {
 
+    componentDidMount() {
+      const { dispatch } = this.props
+      getDecks()
+        .then((decks) => dispatch(addDecks(decks)))
+
+    }
+
     onSelectDeck = (deck) => {
-        console.log(deck.name)
-        console.log(this.props.navigation)
         this.props.navigation.navigate(
           'Deck',
           { deck: deck } 
@@ -68,7 +34,7 @@ class DeckList extends Component {
         )
     }
     render() {
-        const decks = decksArray
+        const { decks } = this.props
         return (
             <View>
                 <FlatList 
@@ -80,5 +46,10 @@ class DeckList extends Component {
         )    
     }
 }
+function mapStateToProps(decks) {
+  return {
+      decks : Object.keys(decks).map((key) =>  formatDeckWithKey(decks[key]))
+  }
+}
 
-export default DeckList
+export default connect(mapStateToProps)(DeckList)

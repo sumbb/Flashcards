@@ -10,7 +10,8 @@ function EachResult({ numOfCorrectAnswers, totalCards, emojiName, text, secondTe
         <View style={styles.resultStyle}>
             <Entypo name={emojiName} size={100}/>
             <Text style={styles.firstText}>{text}</Text>
-            <Text style={styles.secondText}>{`Answered ${numOfCorrectAnswers} out of ${totalCards} questions correctly.`}</Text>
+            <Text style={{fontSize: 20}}>{"You answered"}</Text>
+            <Text style={styles.secondText}>{`${numOfCorrectAnswers} out of ${totalCards} questions correctly.`}</Text>
             <Text style={styles.thirdText}>{secondText}</Text>
         </View>
     )

@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Text, TextInput, StyleSheet, KeyboardAvoidingView} from 'react-native'
 import { white, black, purple } from '../utils/colors'
 import AppButton from './AppButton'
+import { connect } from 'react-redux'
+import { formatDeck } from '../utils/helper'
+import { addQuestion } from '../actions';
 
 class AddCard extends Component {
 
@@ -18,12 +21,18 @@ class AddCard extends Component {
     }
 
     onSubmit = () => {
-        console.log(this.state)
+        const { dispatch, deck } = this.props
+        const { questionText, answerText } = this.state
+        const question = {
+            question: questionText,
+            answer: answerText
+        }
+
         // Add card to the Deck in db 
-        // update the store 
+        dispatch(addQuestion(deck.title, question))
         this.props.navigation.navigate(
             'Deck',
-            { deck: this.props.navigation.state.params.deck } // will be changed later 
+            { deck: deck } // will be changed later 
         )
     }
 
@@ -60,7 +69,14 @@ class AddCard extends Component {
     }
 }
 
-export default AddCard
+function mapStateToProps(decks, { navigation }) {
+    const { deck } = navigation.state.params
+    return {
+        deck: formatDeck(decks[deck.title])
+    }
+}
+
+export default connect(mapStateToProps)(AddCard)
 
 const styles = StyleSheet.create({
     formContainer: {

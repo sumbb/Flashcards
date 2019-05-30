@@ -1,22 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { gray, black, white, red } from '../utils/colors'
 import AppButton from './AppButton'
-
-function Btn({ onPress, btnStyle, btnTextStyle, text, deck }) {
-    return (
-        <TouchableOpacity
-         style={btnStyle}
-         onPress={() => onPress(deck)}>
-             <Text style={btnTextStyle}>{text}</Text>
-        </TouchableOpacity>
-    )
-}
+import { connect } from 'react-redux'
+import { formatDeck } from '../utils/helper';
 
 class Deck extends Component {
 
     onAddCard = ({ deck }) => {
-        console.log("Add card to: " , deck.name)
         this.props.navigation.navigate(
             'AddCard',
             { deck: deck }
@@ -24,24 +15,24 @@ class Deck extends Component {
     }
 
     onStartQuiz = ({ deck }) => {
-        console.log("Start quiz for: ", deck.name)
+        console.log("Start quiz for: ", deck.title)
         // TODO : navigate to the Quiz
     }
 
     onDeleteCard = ({ deck }) => {
-        console.log("Delete the Deck: ", deck.name)
+        console.log("Delete the Deck: ", deck.title)
         // TODO : update the db
         // TODO : update the store
         // TODO : navigate to goBack
     }
 
     render() {
-        const { deck } = this.props.navigation.state.params
+        const { deck } = this.props
 
         return (
             <View style={styles.container}>
                 <View style={{marginTop: 50}}>
-                    <Text style={styles.deckText}>{deck.name}</Text>
+                    <Text style={styles.deckText}>{deck.title}</Text>
                     <Text style={styles.deckCardtext}>{`${deck.numOfCards} cards`}</Text>
                 </View>
                 <View style={styles.btnContainer}>
@@ -75,7 +66,15 @@ class Deck extends Component {
     }
 }
 
-export default Deck
+function mapStateToProps(decks, { navigation }) {
+    const { deck } = navigation.state.params
+
+    return {
+        deck: formatDeck(decks[deck.title])
+    }
+}
+
+export default connect(mapStateToProps)(Deck)
 
 const styles = StyleSheet.create({
     container: {
