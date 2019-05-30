@@ -3,6 +3,7 @@ import { View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
 import { purple } from './utils/colors'
 import Stacks from './components/Stacks'
+import Quiz from './components/Quiz'
 
 function AppStatusBar({backgroundColor, ...props}) {
   return (
@@ -12,12 +13,27 @@ function AppStatusBar({backgroundColor, ...props}) {
   )
 }  
 
+const data = {
+  title: 'React',
+  totalCards: 2,
+  questions: [
+    {
+      question: 'What is React?',
+      answer: 'A library for managing user interfaces'
+    },
+    {
+      question: 'Where do you make Ajax requests in React?',
+      answer: 'The componentDidMount lifecycle event'
+    }
+  ]
+}
+
 export default class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
         <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
-        <Stacks />
+        <Quiz title={data.title} questions={data.questions}/>
       </View>
     );
   }
