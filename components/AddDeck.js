@@ -42,7 +42,7 @@ class AddDeck extends Component {
                     value={this.state.text}
                     placeholder={`Deck Title`}
                 />
-                <SubmitBtn onPress={this.onSubmit} isDisabled={this.isDisabled}/>    
+                <SubmitBtn onPress={this.onSubmit} isDisabled={this.isDisabled} btnStyle={styles.submitBtn} btnTextStyle={styles.submitBtnText} text={'Add Deck'} />    
             </KeyboardAvoidingView>
         )
     }

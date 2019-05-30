@@ -4,7 +4,8 @@ import { Constants } from 'expo'
 import { purple } from './utils/colors'
 import Tabs from './components/Tabs'
 import Deck from './components/Deck'
-
+import AddCard from './components/AddCard'
+import AddDeck from './components/AddDeck'
 
 function AppStatusBar({backgroundColor, ...props}) {
   return (
@@ -19,7 +20,7 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <AppStatusBar backgroundColor={purple} barStyle='light-content'/>
-        <Deck deck={{ name: 'deck1', numOfCards: 4}}/>
+        <AddCard deck={{ name: 'deck10', numOfCards: 4}}/>
       </View>
     );
   }

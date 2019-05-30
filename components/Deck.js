@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView} from 'react-native'
 import { gray, black, white, red } from '../utils/colors'
+import AppButton from './AppButton'
 
 function Btn({ onPress, btnStyle, btnTextStyle, text, deck }) {
     return (
@@ -14,17 +15,17 @@ function Btn({ onPress, btnStyle, btnTextStyle, text, deck }) {
 
 class Deck extends Component {
 
-    onAddCard = (deck) => {
+    onAddCard = ({ deck }) => {
         console.log("Add card to: " , deck.name)
         // TODO : navigate to the Addcard 
     }
 
-    onStartQuiz = (deck) => {
+    onStartQuiz = ({ deck }) => {
         console.log("Start quiz for: ", deck.name)
         // TODO : navigate to the Quiz
     }
 
-    onDeleteCard = (deck) => {
+    onDeleteCard = ({ deck }) => {
         console.log("Delete the Deck: ", deck.name)
         // TODO : update the db
         // TODO : update the store
@@ -40,22 +41,25 @@ class Deck extends Component {
                     <Text style={styles.deckCardtext}>{`${deck.numOfCards} cards`}</Text>
                 </View>
                 <View style={styles.btnContainer}>
-                    <Btn 
-                        onPress={this.onAddCard} 
+                    <AppButton
+                        onPress={this.onAddCard}
+                        isDisabled={false}
                         btnStyle={styles.addCardBtn}
                         btnTextStyle={styles.addCardBtnText} 
                         text={'Add Card'} 
                         deck={deck}
                     />
-                    <Btn 
+                    <AppButton 
                         onPress={this.onStartQuiz} 
+                        isDisabled={false}
                         btnStyle={styles.startQuizBtn}
                         btnTextStyle={styles.startQuizBtnText} 
                         text={'Start Quiz'} 
                         deck={deck}
                     />
-                    <Btn 
-                        onPress={this.onDeleteCard} 
+                    <AppButton 
+                        onPress={this.onDeleteCard}
+                        isDisabled={false}
                         btnStyle={styles.deleteBtn}
                         btnTextStyle={styles.deleteBtnText} 
                         text={'Delete Card'} 
