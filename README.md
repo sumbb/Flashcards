@@ -9,7 +9,7 @@ Flashcards is a simple app supported both on android and ios platforms. As the n
 1) `yarn install` or `npm install` 
 2) `yarn start` or if expo is available then `expo start`
 
-## Platforms supported 
+## Platforms Tested
 
 1) IOS 
 2) Android

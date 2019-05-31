@@ -5,17 +5,7 @@ import { connect } from 'react-redux'
 import { getArrayOfDeckTitles, deckPresent } from '../utils/helper'
 import { addDeck } from '../actions';
 import { saveDeckTitle } from '../utils/api'
-
-function SubmitBtn({ onPress, isDisabled }) {
-    return (
-        <TouchableOpacity
-         style={styles.submitBtn}
-         onPress={onPress}
-         disabled={isDisabled()}>
-             <Text style={styles.submitBtnText}>Submit</Text>
-        </TouchableOpacity>
-    )
-}
+import AppButton from './AppButton';
 
 class AddDeck extends Component {
 
@@ -68,12 +58,12 @@ class AddDeck extends Component {
                     value={this.state.text}
                     placeholder={`Deck Title`}
                 />
-                <SubmitBtn 
+                <AppButton 
                     onPress={this.onSubmit} 
                     isDisabled={this.isDisabled} 
                     btnStyle={styles.submitBtn} 
                     btnTextStyle={styles.submitBtnText} 
-                    text={'Add Deck'} 
+                    text={'Create Deck'} 
                 />
                 </View>
                     
