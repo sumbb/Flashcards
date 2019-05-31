@@ -10,27 +10,31 @@ class Card extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.firstContainer}>
-                    <Text style={styles.topText}>{`${numOfAnswered+1}/${totalCards}`}</Text>
+                <Text style={styles.topText}>{`${numOfAnswered+1}/${totalCards}`}</Text>
+                    <Text style={styles.qaText}> {isQuestion ? `${question.question}` : `${question.answer}`}</Text>
                 </View>
                 <View style={styles.secondContainer}>
-                    <Text style={styles.qaText}> {isQuestion ? `${question.question}` : `${question.answer}`}</Text>
-                    <TouchableOpacity onPress={flipCard}>
-                        <Text style={styles.btnTextStyle}>{isQuestion ? `Answer` : `Question`}</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.thirdContainer}>
-                    <AppButton
-                        onPress={onCorrect}
-                        btnStyle={styles.correctBtn}
-                        btnTextStyle={styles.correctBtnText} 
-                        text={'Correct'}
+                    <AppButton 
+                        onPress={flipCard}
+                        btnStyle={styles.showBtn}
+                        btnTextStyle={styles.btnTextStyle} 
+                        text={isQuestion ? `Show Answer` : `Show Question`}
                     />
-                     <AppButton
-                        onPress={onIncorrect}
-                        btnStyle={styles.inCorrectBtn}
-                        btnTextStyle={styles.inCorrectBtnText} 
-                        text={'Incorrect'}
-                    />
+                    {   !isQuestion && <AppButton
+                                            onPress={onCorrect}
+                                            btnStyle={styles.correctBtn}
+                                            btnTextStyle={styles.correctBtnText} 
+                                            text={'Correct'}
+                                        />
+                    }
+                    { !isQuestion &&  <AppButton
+                                            onPress={onIncorrect}
+                                            btnStyle={styles.inCorrectBtn}
+                                            btnTextStyle={styles.inCorrectBtnText} 
+                                            text={'Incorrect'}
+                                        />
+                    }
+                    
                 </View>
             </View>
         )
@@ -82,14 +86,15 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     topText: {
-        fontSize: 25
+        fontSize: 25,
+        paddingBottom: 10
     },
     firstContainer: {
-        flex: 1,
+        flex: 3,
+        alignItems: 'center'
     },
     secondContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
         marginBottom: 40,
         flex: 2
     },
@@ -97,11 +102,21 @@ const styles = StyleSheet.create({
         fontSize: 35,
         marginBottom: 20
     },
-    thirdContainer: {
-        flex: 1
-    },
     btnTextStyle: {
         color: red,
         fontSize: 25
-    }
+    },
+    showBtn: {
+        backgroundColor: white,
+        borderRadius: 7,
+        borderWidth: 1,
+        borderColor: red,
+        height: 48,
+        marginLeft: 40,
+        marginRight: 40,
+        width: 250,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20
+    },
 })

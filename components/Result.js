@@ -81,6 +81,8 @@ const styles = StyleSheet.create({
     },  
     secondContainer: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     retakeQuizBtn: {
         backgroundColor: white,
@@ -92,12 +94,12 @@ const styles = StyleSheet.create({
         width: 250,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
     },
     retakeQuizBtnText: {
         color: black,
         fontSize: 22,
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingBottom: 10
     },
     backToDeckBtn: {
         backgroundColor: black,
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
         width: 250,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
+        marginTop: 10
     },
     backToDeckBtnText: {
         color: black,
@@ -121,17 +123,14 @@ const styles = StyleSheet.create({
     resultStyle: {
         alignItems: 'center',
         flex: 1,
-        paddingTop: 80,
+        paddingTop: 50,
     },
     firstText: {
         fontSize: 30,
-        marginTop: 20,
-        marginBottom: 50,
         color: purple
     },
     secondText: {
         fontSize: 20,
-        marginBottom: 50,
     },
     thirdText: {
         fontSize: 20,
