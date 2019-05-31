@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Animated } from 'react-native'
 import { gray, black, white, red } from '../utils/colors'
 import AppButton from './AppButton'
 import { connect } from 'react-redux'
 import { formatDeck } from '../utils/helper';
 
 class Deck extends Component {
+
+    state = {
+        opacity: new Animated.Value(0)
+    }
 
     onAddCard = ({ deck }) => {
         this.props.navigation.navigate(
@@ -22,11 +26,22 @@ class Deck extends Component {
         )
     }
 
+    componentDidMount() {
+        Animated.timing(
+            this.state.opacity,
+            {
+                toValue: 1,
+                duration: 10000
+            }
+        ).start()
+    }
+
     render() {
         const { deck } = this.props
+        const { opacity } = this.state
 
         return (
-            <View style={styles.container}>
+            <Animated.View style={[styles.container, {opacity}]}>
                 <View style={{marginTop: 50}}>
                     <Text style={styles.deckText}>{deck.title}</Text>
                     <Text style={styles.deckCardtext}>{`${deck.numOfCards} cards`}</Text>
@@ -49,7 +64,7 @@ class Deck extends Component {
                         deck={deck}
                     />
                 </View>
-            </View>
+            </Animated.View>
         )
     }
 }
