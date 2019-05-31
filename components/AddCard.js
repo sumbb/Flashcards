@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, TextInput, StyleSheet, KeyboardAvoidingView} from 'react-native'
+import { Text, TextInput, StyleSheet, KeyboardAvoidingView, View } from 'react-native'
 import { white, black, purple } from '../utils/colors'
 import AppButton from './AppButton'
 import { connect } from 'react-redux'
@@ -45,27 +45,31 @@ class AddCard extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.formContainer}>
-                <Text style={styles.textStyle}>Question:</Text>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={(text) => this.onTextChange(text, true)}
-                    value={this.state.questionText}
-                    placeholder={`Question`}
-                />
-                <Text style={styles.textStyle}>Answer:</Text>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={(text) => this.onTextChange(text, false)}
-                    value={this.state.answerText}
-                    placeholder={`Answer`}
-                />
-                <AppButton 
-                    onPress={this.onSubmit} 
-                    isDisabled={this.isDisabled}
-                    btnStyle={styles.submitBtn}
-                    btnTextStyle={styles.submitBtnText} 
-                    text={'Submit'}
+                <View style={styles.firstContainer}>
+                    <Text style={styles.textStyle}>Question:</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={(text) => this.onTextChange(text, true)}
+                        value={this.state.questionText}
+                        placeholder={`Question`}
                     />
+                    <Text style={styles.textStyle}>Answer:</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={(text) => this.onTextChange(text, false)}
+                        value={this.state.answerText}
+                        placeholder={`Answer`}
+                    />
+                </View>
+                <View style={styles.secondContainer}>
+                    <AppButton 
+                        onPress={this.onSubmit} 
+                        isDisabled={this.isDisabled}
+                        btnStyle={styles.submitBtn}
+                        btnTextStyle={styles.submitBtnText} 
+                        text={'Submit'}
+                    />
+                </View>
             </KeyboardAvoidingView>
         )
     }
@@ -85,11 +89,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         padding: 30,
-        marginTop: 100
     },
     textStyle: {
         fontSize: 25,
-        marginTop: 25,
+        paddingBottom: 10
     },
     textInput: {
         height: 45,
@@ -97,7 +100,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: 350,
         borderRadius: 8,
-        marginTop: 30
     },
     submitBtn: {
         backgroundColor: purple,
@@ -108,11 +110,22 @@ const styles = StyleSheet.create({
         width: 250,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100
     },
     submitBtnText: {
         color: white,
         fontSize: 22,
         textAlign: 'center'
     },
+    firstContainer: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    secondContainer: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    thirdContainer: {
+        flex: 1,
+        alignItems: 'center'
+    }
 })

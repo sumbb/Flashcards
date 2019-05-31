@@ -56,16 +56,27 @@ class AddDeck extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.formContainer}>
-                <Text style={styles.text}>What is the title</Text>
-                <Text style={styles.text}>of your new</Text>
-                <Text style={[styles.text, { paddingBottom: 20}]}>deck?</Text>
+                <View style={styles.firstContainer}>
+                    <Text style={styles.text}>What is the title</Text>
+                    <Text style={styles.text}>of your new</Text>
+                    <Text style={[styles.text, { paddingBottom: 20}]}>deck?</Text>
+                </View>
+                <View style={styles.secondContainer}>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                     placeholder={`Deck Title`}
                 />
-                <SubmitBtn onPress={this.onSubmit} isDisabled={this.isDisabled} btnStyle={styles.submitBtn} btnTextStyle={styles.submitBtnText} text={'Add Deck'} />    
+                <SubmitBtn 
+                    onPress={this.onSubmit} 
+                    isDisabled={this.isDisabled} 
+                    btnStyle={styles.submitBtn} 
+                    btnTextStyle={styles.submitBtnText} 
+                    text={'Add Deck'} 
+                />
+                </View>
+                    
             </KeyboardAvoidingView>
         )
     }
@@ -114,4 +125,13 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center'
     },
+    firstContainer: {
+        flex: 1,
+        alignItems: 'center',
+        paddingTop: 20
+    },
+    secondContainer: {
+        flex: 1,
+        alignItems: 'center'
+    }
 })
