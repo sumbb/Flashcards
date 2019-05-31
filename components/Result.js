@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Platform } from 'react-native'
 import AppButton from './AppButton'
 import { white, black, red, purple } from '../utils/colors'
 import { Ionicons, Entypo } from '@expo/vector-icons'
+import { clearLocalNotification, setLocalNotification } from '../utils/notification'
 
 
 function EachResult({ numOfCorrectAnswers, totalCards, emojiName, text, secondText }) {
@@ -18,6 +19,12 @@ function EachResult({ numOfCorrectAnswers, totalCards, emojiName, text, secondTe
 }
 
 class Result extends Component {
+
+    componentDidMount() {
+        clearLocalNotification()
+            .then(setLocalNotification)
+    }
+
     render() {
         const { totalCards, numOfCorrectAnswers, onRestartQuiz, onBackToDeck } = this.props
         return (
